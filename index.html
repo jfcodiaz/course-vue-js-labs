@@ -6,23 +6,27 @@
   </head>
   <body>
     <div id="app">
-      <div v-show="!hidden">
-          <h1>Title</h1>
-          <h2>Subtitle</h2>
-          <a :href="url" target="_blank">Ir a {{page}}</a>
-      </div>
-      <div v-show="hidden">
-        Something is hidden
-      </div> 
+      <h1>{{ title | uppercase }}</h1> 
+      <h1>{{ subtitle | lowercase | capitalize }}</h1>
     </div>
     <script src="http://unpkg.com/vue"></script>
     <script>
       let app = new Vue({
         el: '#app',
         data:{
-          url: 'https://www.google.com',
-          page: 'Google!',
-          hidden: false
+          title: 'Course JS',
+          subtitle: 'How to use filters'
+        },
+        filters:{
+          uppercase:  function (text) {
+            return text.toUpperCase()
+          },
+          lowercase: function (text) {
+            return text.toLowerCase()
+          },
+          capitalize: function (text) {
+            return text[0].toUpperCase() + text.substring(1)
+          }
         }
       })
     </script>
