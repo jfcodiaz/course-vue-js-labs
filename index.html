@@ -6,17 +6,20 @@
   </head>
   <body>
     <div id="app">
-      Hola {{nombre}}, 
-      <a :href="url" target="_blank">Ir a {{page}}</a>
+      <template v-if="showLink">
+          <h1>Title</h1>
+          <h2>Subtitle</h2>
+          <a :href="url" target="_blank">Ir a {{page}}</a>
+      </template> 
     </div>
     <script src="http://unpkg.com/vue"></script>
     <script>
       let app = new Vue({
         el: '#app',
         data:{
-          nombre: 'Pako Díaz',
           url: 'https://www.google.com',
-          page: 'Google!'
+          page: 'Google!',
+          showLink: false
         }
       })
     </script>
