@@ -9,23 +9,11 @@
       <input type="text" name="name" v-model="name" placeholder="insert your name"/>
       <p>Your name in uppercase is: {{  name | uppercase }}</p>
       <form @submit.prevent="submit">
-        <h2>what would  do you like to learn?</h2>
-
-        <input v-model="cursos" type="checkbox" id="vue" value="vue.js">
-        <label for="vue">Vue.js</label>
-        
-        <input v-model="cursos" type="checkbox" id="react" value="React">
-        <label for="react">React</label>
-
-        <input v-model="cursos" type="checkbox" id="react" value="React Native">
-        <label for="react">React Native</label>
-
-        <input v-model="cursos" type="checkbox" id="node" value="Node.js">
-        <label for="node">Node.js</label>
-
-        <input v-model="cursos" type="checkbox" id="ruby" value="Ruby">
-        <label for="react">Ruby</label>
-
+        <h2>What would do you like to learn?</h2>
+        <template v-for="skill in skills">
+          <input v-model="selectedSkills" type="checkbox" :id="skill.value" :value="skill.value">
+          <label :for="skill.value">{{skill.name}}</label>
+        </template>
         <input type="submit" value="Send"/>
       </form>
     </div>
@@ -35,7 +23,14 @@
         el: '#app',
         data:{
           name:'',
-          cursos:[]
+          skills: [
+            { name:'Vue.js', value:'vue' },
+            { name:'React', value:'react' },
+            { name:'React Native', value:'reactNative' },
+            { name:'Node.js', value:'node' },
+            { name:'Ruby', value:'ruby' }
+          ],
+          selectedSkills:[]
         },
         filters: {
           uppercase: function (text) {
@@ -44,7 +39,7 @@
         },
         methods:{
           submit: function(){
-            console.log(this.cursos)
+            console.log(this.selectedSkills)
           }
         }
       })
