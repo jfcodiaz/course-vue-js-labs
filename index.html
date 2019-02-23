@@ -1,70 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Curso Vue.js</title>
+    <title>vue-music</title>
   </head>
   <body>
-    <div id="app">
-      <input type="text" name="name" v-model="name" placeholder="insert your name"/>
-      <p>Your name in uppercase is: {{  name | uppercase }}</p>
-      <form @submit.prevent="submit">
-        <h2>What would do you like to learn?</h2>
-        <template v-for="skill in skills">
-          <skill :skill="skill" @checked="selectSkill"/>
-        </template>
-        <input type="submit" value="Send"/>
-      </form>
-    </div>
-    <script src="http://unpkg.com/vue"></script>
-    <script>
-      
-      Vue.component('skill', {
-        props: ['skill', 'selectedSkills'],
-        methods: {
-          onchange: function (ev) {
-            this.$emit("checked", this.skill, ev.target.checked)
-          }
-        },
-        template: `
-          <div>
-            <input  type="checkbox" :id="skill.value" :value="skill.value" @change="onchange">
-            <label :for="skill.value">{{skill.name}}</label>
-          </div>
-        `
-      })
-
-      let app = new Vue({
-        el: '#app',
-        data:{
-          name:'',
-          skills: [
-            { name:'Vue.js', value:'vue' },
-            { name:'React', value:'react' },
-            { name:'React Native', value:'reactNative' },
-            { name:'Node.js', value:'node' },
-            { name:'Ruby', value:'ruby' }
-          ],
-          selectedSkills:[]
-        },
-        filters: {
-          uppercase: function (text) {
-            return text.toUpperCase()
-          }
-        },
-        methods:{
-          submit: function(){
-            console.log(this.selectedSkills)
-          },
-          selectSkill: function(skill, selected){
-            if(selected){
-              this.selectedSkills.push(skill)
-            } else {
-              this.selectedSkills.splice(this.selectedSkills.indexOf(skill), 1)
-            }
-          }
-        }
-      })
-    </script>
+    <div id="app"></div>
+    <script src="/dist/build.js"></script>
   </body>
 </html>
