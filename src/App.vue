@@ -3,17 +3,25 @@
     img(src='./assets/logo.png')
     h1 Vue Music
     ul
-      li(v-for="artist in artists") {{artist.name}}
+      artist(
+        v-for="artist in artists" 
+        :artist="artist"
+        :key="artist.mbid"
+      )
 </template>
 
 <script>
 import {getArtists} from './api'
+import Artist from './components/Artist'
 export default {
   name: 'app',
   data () {
     return {
       artists:[]
     }
+  },
+  components:{
+    Artist
   },
   mounted: function () {
     const self = this;
