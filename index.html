@@ -6,11 +6,14 @@
   </head>
   <body>
     <div id="app">
-      <template v-if="showLink">
+      <div v-show="!hidden">
           <h1>Title</h1>
           <h2>Subtitle</h2>
           <a :href="url" target="_blank">Ir a {{page}}</a>
-      </template> 
+      </div>
+      <div v-show="hidden">
+        Something is hidden
+      </div> 
     </div>
     <script src="http://unpkg.com/vue"></script>
     <script>
@@ -19,7 +22,7 @@
         data:{
           url: 'https://www.google.com',
           page: 'Google!',
-          showLink: false
+          hidden: false
         }
       })
     </script>
