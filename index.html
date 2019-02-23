@@ -11,14 +11,29 @@
       <form @submit.prevent="submit">
         <h2>What would do you like to learn?</h2>
         <template v-for="skill in skills">
-          <input v-model="selectedSkills" type="checkbox" :id="skill.value" :value="skill.value">
-          <label :for="skill.value">{{skill.name}}</label>
+          <skill :skill="skill" @checked="selectSkill"/>
         </template>
         <input type="submit" value="Send"/>
       </form>
     </div>
     <script src="http://unpkg.com/vue"></script>
     <script>
+      
+      Vue.component('skill', {
+        props: ['skill', 'selectedSkills'],
+        methods: {
+          onchange: function (ev) {
+            this.$emit("checked", this.skill, ev.target.checked)
+          }
+        },
+        template: `
+          <div>
+            <input  type="checkbox" :id="skill.value" :value="skill.value" @change="onchange">
+            <label :for="skill.value">{{skill.name}}</label>
+          </div>
+        `
+      })
+
       let app = new Vue({
         el: '#app',
         data:{
@@ -40,6 +55,13 @@
         methods:{
           submit: function(){
             console.log(this.selectedSkills)
+          },
+          selectSkill: function(skill, selected){
+            if(selected){
+              this.selectedSkills.push(skill)
+            } else {
+              this.selectedSkills.splice(this.selectedSkills.indexOf(skill), 1)
+            }
           }
         }
       })
