@@ -1,8 +1,10 @@
 import {API_KEY} from './config'
 
-const URL = `http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=mexico&api_key=${API_KEY}&format=json`
 
-export function getArtists() {
+const API_HOME = `http://ws.audioscrobbler.com/2.0`
+
+export function getArtists(country='mexico') {
+  const URL = `${API_HOME}/?method=geo.gettopartists&country=${country}&api_key=${API_KEY}&format=json`
   return fetch(URL, {
     method: 'GET'
   })

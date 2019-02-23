@@ -2,6 +2,9 @@
   #app
     img(src='./assets/logo.png')
     h1 Vue Music
+    select(v-model="selectedCountry")
+      option(v-for="country in coutries" v-bind:value="country.value") {{country.name}}
+    sppiner(v-show="loading")
     ul
       artist(
         v-for="artist in artists" 
@@ -13,22 +16,43 @@
 <script>
 import {getArtists} from './api'
 import Artist from './components/Artist'
+import Sppiner from './components/Spinner'
 export default {
   name: 'app',
   data () {
     return {
-      artists:[]
+      loading:true,
+      artists:[],
+      coutries: [
+        {name:'México', value:'mexico'},
+        {name:'Argentina', value:'argentina'},
+        {name:'Colombia', value:'colobia'},
+        {name:'España', value:'spain'},
+      ],
+      selectedCountry: 'mexico',
+    }
+  },
+  watch: {
+    selectedCountry: function(value) {
+      this.refreshArtist(value)
     }
   },
   components:{
-    Artist
+    Artist, Sppiner
+  },
+  methods: {
+    refreshArtist(country){
+      this.loading = true
+      const self = this;
+      getArtists(country)
+      .then(function(artists) {
+        self.loading = false
+        self.artists = artists
+      })
+    }
   },
   mounted: function () {
-    const self = this;
-    getArtists()
-    .then(function(artists) {
-      self.artists = artists
-    })
+    this.refreshArtist()
   }
 }
 </script>
