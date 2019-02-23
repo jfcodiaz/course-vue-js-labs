@@ -6,26 +6,45 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{ title | uppercase }}</h1> 
-      <h1>{{ subtitle | lowercase | capitalize }}</h1>
+      <input type="text" name="name" v-model="name" placeholder="insert your name"/>
+      <p>Your name in uppercase is: {{  name | uppercase }}</p>
+      <form @submit.prevent="submit">
+        <h2>what would  do you like to learn?</h2>
+
+        <input v-model="cursos" type="checkbox" id="vue" value="vue.js">
+        <label for="vue">Vue.js</label>
+        
+        <input v-model="cursos" type="checkbox" id="react" value="React">
+        <label for="react">React</label>
+
+        <input v-model="cursos" type="checkbox" id="react" value="React Native">
+        <label for="react">React Native</label>
+
+        <input v-model="cursos" type="checkbox" id="node" value="Node.js">
+        <label for="node">Node.js</label>
+
+        <input v-model="cursos" type="checkbox" id="ruby" value="Ruby">
+        <label for="react">Ruby</label>
+
+        <input type="submit" value="Send"/>
+      </form>
     </div>
     <script src="http://unpkg.com/vue"></script>
     <script>
       let app = new Vue({
         el: '#app',
         data:{
-          title: 'Course JS',
-          subtitle: 'How to use filters'
+          name:'',
+          cursos:[]
         },
-        filters:{
-          uppercase:  function (text) {
+        filters: {
+          uppercase: function (text) {
             return text.toUpperCase()
-          },
-          lowercase: function (text) {
-            return text.toLowerCase()
-          },
-          capitalize: function (text) {
-            return text[0].toUpperCase() + text.substring(1)
+          }
+        },
+        methods:{
+          submit: function(){
+            console.log(this.cursos)
           }
         }
       })
