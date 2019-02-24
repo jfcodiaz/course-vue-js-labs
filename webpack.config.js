@@ -34,7 +34,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: '[name].[ext]?[hash]',
+          publicPath: process.env.NODE_ENV  === 'production' ? '/course-vue-js-labs/dist' : '/dist',
         }
       }
     ]

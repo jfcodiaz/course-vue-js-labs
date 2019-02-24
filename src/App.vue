@@ -26,7 +26,7 @@ export default {
       coutries: [
         {name:'México', value:'mexico'},
         {name:'Argentina', value:'argentina'},
-        {name:'Colombia', value:'colobia'},
+        {name:'Colombia', value:'colombia'},
         {name:'España', value:'spain'},
       ],
       selectedCountry: 'mexico',
@@ -34,7 +34,7 @@ export default {
   },
   watch: {
     selectedCountry: function(value) {
-      this.refreshArtist(value)
+        this.refreshArtist(value)
     }
   },
   components:{
